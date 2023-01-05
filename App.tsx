@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import AppLayout from "./components/AppLayout";
 import { supabase } from "./shared/Supabase";
 import { useUser } from "./shared/store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 //for auth
 //https://dev.to/fedorish/google-sign-in-using-supabase-and-react-native-expo-14jf
@@ -16,6 +17,8 @@ const theme = extendTheme({
     initialColorMode: "dark",
   },
 });
+
+const client = new QueryClient();
 
 export default function App() {
   const setSession = useUser((state) => state.setSession);
@@ -32,8 +35,10 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={theme}>
-      <AppLayout />
-      <StatusBar />
+      <QueryClientProvider client={client}>
+        <AppLayout />
+        <StatusBar />
+      </QueryClientProvider>
     </NativeBaseProvider>
   );
 }
