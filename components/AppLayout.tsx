@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 const AppLayout = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={{ headerTitle: "SupaChat" }}>
         <Tab.Screen name="home" component={Home}></Tab.Screen>
         <Tab.Screen name="user" component={User}></Tab.Screen>
       </Tab.Navigator>

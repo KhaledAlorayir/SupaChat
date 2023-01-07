@@ -1,12 +1,15 @@
-import { Button } from "native-base";
-import ScreenLayout from "../components/ScreenLayout";
+import { Button, Box } from "native-base";
+import ChatList from "../components/home/ChatList";
 type Props = {};
 
 const Home = (props: Props) => {
   return (
-    <ScreenLayout>
+    <Box flex={1} bg="coolGray.800">
+      <Box flex={1}>
+        <ChatList />
+      </Box>
       <Button>Home</Button>
-    </ScreenLayout>
+    </Box>
   );
 };
 
