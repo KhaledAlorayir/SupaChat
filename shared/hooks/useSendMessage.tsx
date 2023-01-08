@@ -11,9 +11,6 @@ const SendMessage = async ({ content }: { content: string }) => {
 const useSendMessage = () => {
   return useMutation({
     mutationFn: SendMessage,
-    onSuccess(data, variables, context) {
-      console.log("yay");
-    },
   });
 };
 
