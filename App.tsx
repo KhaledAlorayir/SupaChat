@@ -42,3 +42,13 @@ export default function App() {
     </NativeBaseProvider>
   );
 }
+
+/*
+Todo: 
+1- post messages
+2- realtime connection
+3- delete messages
+4- notifictions
+5- load older
+6- images?
+*/
