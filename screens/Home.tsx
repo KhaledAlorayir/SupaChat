@@ -1,9 +1,12 @@
-import { Button, Box, HStack, Input, KeyboardAvoidingView } from "native-base";
+import { Box, KeyboardAvoidingView } from "native-base";
 import ChatForm from "../components/home/ChatForm";
 import ChatList from "../components/home/ChatList";
+import { useUser } from "../shared/store";
 type Props = {};
 
 const Home = (props: Props) => {
+  const session = useUser((state) => state.session);
+
   return (
     <KeyboardAvoidingView
       flex={1}
@@ -14,7 +17,7 @@ const Home = (props: Props) => {
       <Box flex={1}>
         <ChatList />
       </Box>
-      <ChatForm />
+      {session && <ChatForm />}
     </KeyboardAvoidingView>
   );
 };

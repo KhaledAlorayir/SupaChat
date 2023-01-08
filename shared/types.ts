@@ -6,7 +6,7 @@ export interface Message {
   profiles: User;
 }
 
-interface User {
+export interface User {
   avatar_url: string;
   full_name: string;
   id: string;

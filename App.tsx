@@ -45,9 +45,8 @@ export default function App() {
 
 /*
 Todo: 
-1- read last 50
-2- realtime connection
 2.5- dont enable send unit authed
+2- realtime connection
 3- delete messages
 4- notifictions
 5- load older

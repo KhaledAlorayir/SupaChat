@@ -24,6 +24,7 @@ const ChatForm = (props: Props) => {
     <HStack bg="coolGray.900" py={2} px={1} alignItems="center">
       <Box flex={1}>
         <TextArea
+          editable={!isLoading}
           w="full"
           variant="rounded"
           placeholder="enter your message.."

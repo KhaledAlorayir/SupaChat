@@ -1,13 +1,13 @@
 import { Center, FlatList, Spinner } from "native-base";
-import { useUser } from "../../shared/store";
 import useMessages from "../../shared/hooks/useMessages";
 import ChatCard from "./ChatCard";
+import useMessagesUpdater from "../../shared/hooks/useRealtimeMessageUpdater";
 
 type Props = {};
 
 const ChatList = (props: Props) => {
-  const user = useUser((state) => state.session?.user);
   const { data, isSuccess, isLoading } = useMessages();
+  useMessagesUpdater();
 
   if (isLoading) {
     return (

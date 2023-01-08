@@ -7,7 +7,6 @@ type Props = {
   message: Message;
 };
 
-// IMPL after real data
 const ChatCard = ({ message }: Props) => {
   const user = useUser((state) => state.session?.user);
 
