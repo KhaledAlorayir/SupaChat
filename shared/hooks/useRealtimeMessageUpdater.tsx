@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { supabase } from "../Supabase";
 import { useQueryClient } from "@tanstack/react-query";
 import { Message, User } from "../types";
+import { FlatList as FL } from "react-native";
 
 const cachedUsers: User[] = [];
 
-const useMessagesUpdater = () => {
+const useRealtimeMessageUpdater = () => {
   const qc = useQueryClient();
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const useMessagesUpdater = () => {
               user = data as User;
             }
 
-            qc.setQueriesData(["messages"], (cache: Message[] | undefined) => {
+            qc.setQueryData(["messages"], (cache: Message[] | undefined) => {
               if (cache) {
                 const newMsg = { ...payload.new, profiles: user } as Message;
                 return [...cache, newMsg];
@@ -51,4 +52,4 @@ const useMessagesUpdater = () => {
   });
 };
 
-export default useMessagesUpdater;
+export default useRealtimeMessageUpdater;

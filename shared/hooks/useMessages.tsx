@@ -6,7 +6,7 @@ const getMessages = async (): Promise<Message[]> => {
   const { data, error } = await supabase
     .from("Message")
     .select("*,profiles(full_name,id,avatar_url)")
-    .limit(2)
+    .limit(50)
     .order("created_at", { ascending: false });
 
   if (error) {
