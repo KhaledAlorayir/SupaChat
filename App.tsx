@@ -45,7 +45,6 @@ export default function App() {
 
 /*
 Todo: 
-3- delete messages & handle realtime 
 3.5- test with 2 phones
 4- notifictions
 5- load older

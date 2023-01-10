@@ -1,4 +1,4 @@
-import { Center, FlatList, Spinner, Button } from "native-base";
+import { Center, FlatList, Spinner } from "native-base";
 import useMessages from "../../shared/hooks/useMessages";
 import ChatCard from "./ChatCard";
 import useMessagesUpdater from "../../shared/hooks/useRealtimeMessageUpdater";
@@ -26,7 +26,6 @@ const ChatList = (props: Props) => {
 
   return (
     <>
-      <Button onPress={() => listRef.current?.scrollToEnd()}>ss</Button>
       {isSuccess && (
         <FlatList
           ref={listRef}

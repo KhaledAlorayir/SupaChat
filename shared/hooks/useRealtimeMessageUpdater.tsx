@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { supabase } from "../Supabase";
 import { useQueryClient } from "@tanstack/react-query";
 import { Message, User } from "../types";
-import { FlatList as FL } from "react-native";
 
 const cachedUsers: User[] = [];
 
@@ -38,6 +37,14 @@ const useRealtimeMessageUpdater = () => {
               if (cache) {
                 const newMsg = { ...payload.new, profiles: user } as Message;
                 return [...cache, newMsg];
+              }
+              return cache;
+            });
+          } else if (payload.eventType === "DELETE") {
+            const deletedId: number = payload.old.id;
+            qc.setQueryData(["messages"], (cache: Message[] | undefined) => {
+              if (cache) {
+                return cache.filter((m) => m.id !== deletedId);
               }
               return cache;
             });
