@@ -42,6 +42,7 @@ const useRealtimeMessageUpdater = () => {
             });
           } else if (payload.eventType === "DELETE") {
             const deletedId: number = payload.old.id;
+
             qc.setQueryData(["messages"], (cache: Message[] | undefined) => {
               if (cache) {
                 return cache.filter((m) => m.id !== deletedId);

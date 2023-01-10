@@ -1,4 +1,5 @@
 import { Box, KeyboardAvoidingView } from "native-base";
+import { Platform } from "react-native";
 import ChatForm from "../components/home/ChatForm";
 import ChatList from "../components/home/ChatList";
 import { useUser } from "../shared/store";
@@ -11,7 +12,7 @@ const Home = (props: Props) => {
     <KeyboardAvoidingView
       flex={1}
       bg="coolGray.800"
-      behavior="padding"
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={85}
     >
       <Box flex={1}>

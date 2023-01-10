@@ -1,14 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { NativeBaseProvider, extendTheme, Box } from "native-base";
-import { useEffect } from "react";
+import { NativeBaseProvider, extendTheme } from "native-base";
 import AppLayout from "./components/AppLayout";
-import { supabase } from "./shared/Supabase";
-import { useUser } from "./shared/store";
+import useAuthChangeHandler from "./shared/hooks/useAuthChangeHandler";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 //for auth
 //https://dev.to/fedorish/google-sign-in-using-supabase-and-react-native-expo-14jf
 import { Buffer } from "buffer";
+import useNotificationsHandler from "./shared/hooks/useNotificationsHandler";
 global.Buffer = Buffer;
 
 const theme = extendTheme({
@@ -21,17 +20,8 @@ const theme = extendTheme({
 const client = new QueryClient();
 
 export default function App() {
-  const setSession = useUser((state) => state.setSession);
-
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
+  useAuthChangeHandler();
+  useNotificationsHandler();
 
   return (
     <NativeBaseProvider theme={theme}>
@@ -45,7 +35,6 @@ export default function App() {
 
 /*
 Todo: 
-3.5- test with 2 phones
 4- notifictions
 5- load older
 6- images?
