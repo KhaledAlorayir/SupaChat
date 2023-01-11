@@ -2,8 +2,22 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 import { useEffect, useRef } from "react";
+import { supabase } from "../Supabase";
+import { useUser } from "../store";
 
-async function registerForPushNotificationsAsync() {
+//Handle notifications when app is one the fourground
+//defualt behivor that it will not show the noti//
+/* Notifications.setNotificationHandler({
+  async handleNotification() {
+    return {
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    };
+  },
+}); */
+//
+const registerForPushNotificationsAsync = async () => {
   let token;
   if (Device.isDevice) {
     const { status: existingStatus } =
@@ -18,7 +32,7 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
+    storeExpoToken(token);
   } else {
     alert("Must use physical device for Push Notifications");
   }
@@ -33,7 +47,25 @@ async function registerForPushNotificationsAsync() {
   }
 
   return token;
-}
+};
+
+const storeExpoToken = async (token: string) => {
+  const user_id = useUser.getState().session?.user.id;
+  if (user_id) {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("expo_token")
+      .eq("id", user_id)
+      .single();
+
+    if (!data?.expo_token || data.expo_token !== token) {
+      await supabase
+        .from("profiles")
+        .update({ expo_token: token })
+        .eq("id", user_id);
+    }
+  }
+};
 
 const useNotificationsHandler = () => {
   const onMount = useRef(true);
@@ -43,7 +75,7 @@ const useNotificationsHandler = () => {
       registerForPushNotificationsAsync();
     }
     onMount.current = false;
-  });
+  }, []);
 
   return null;
 };
