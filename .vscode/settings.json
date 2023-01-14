@@ -1,4 +1,7 @@
 {
   "deno.enable": true,
-  "deno.lint": false
+  "deno.unstable": true,
+  "deno.lint": false,
+  "deno.enablePaths": ["./supabase"],
+  "editor.inlayHints.enabled": "off"
 }

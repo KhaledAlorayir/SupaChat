@@ -51,13 +51,13 @@ const registerForPushNotificationsAsync = async () => {
 
 const storeExpoToken = async (token: string) => {
   const user_id = useUser.getState().session?.user.id;
+  console.log("here");
   if (user_id) {
     const { data, error } = await supabase
       .from("profiles")
       .select("expo_token")
       .eq("id", user_id)
       .single();
-
     if (!data?.expo_token || data.expo_token !== token) {
       await supabase
         .from("profiles")

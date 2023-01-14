@@ -35,10 +35,6 @@ export default function App() {
 
 /*
 Todo: 
-1- notifictions
-  2- insert expo token to profile table (on load check if is it there or change it)
-  3- webhooks + supabase functions to send push not (nodejs sdk works for deno?) 
-
 2- load older
 3- images?
 */
